@@ -6,5 +6,4 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 class DiscountCustomMessagesPersistenceFactory extends AbstractPersistenceFactory
 {
-
 }
