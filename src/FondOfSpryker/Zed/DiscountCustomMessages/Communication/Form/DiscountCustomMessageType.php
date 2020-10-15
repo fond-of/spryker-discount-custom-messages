@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Form;
 
-use Generated\Shared\Transfer\DiscountCustomMessagesTransfer;
+use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Communication\DiscountCustomMessagesCommunicationFactory getFactory()
  */
-class DiscountCustomMessagesType extends AbstractType
+class DiscountCustomMessageType extends AbstractType
 {
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -26,7 +26,7 @@ class DiscountCustomMessagesType extends AbstractType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'data_class' => DiscountCustomMessagesTransfer::class,
+            'data_class' => DiscountCustomMessageTransfer::class,
         ]);
     }
 
@@ -50,8 +50,8 @@ class DiscountCustomMessagesType extends AbstractType
      */
     public function addErrorMessageField(FormBuilderInterface $builder)
     {
-        $builder->add(DiscountCustomMessagesTransfer::ERROR_MESSAGE, TextType::class, [
-
+        $builder->add(DiscountCustomMessageTransfer::ERROR_MESSAGE, TextType::class, [
+            'required' => false,
         ]);
 
         return $this;
@@ -64,8 +64,8 @@ class DiscountCustomMessagesType extends AbstractType
      */
     public function addSuccessMessageField(FormBuilderInterface $builder)
     {
-        $builder->add(DiscountCustomMessagesTransfer::SUCCESS_MESSAGE, TextType::class, [
-
+        $builder->add(DiscountCustomMessageTransfer::SUCCESS_MESSAGE, TextType::class, [
+            'required' => false,
         ]);
 
         return $this;
@@ -79,7 +79,7 @@ class DiscountCustomMessagesType extends AbstractType
     protected function addIdLocaleField(FormBuilderInterface $builder)
     {
         $builder
-            ->add(DiscountCustomMessagesTransfer::ID_LOCALE, HiddenType::class, [
+            ->add(DiscountCustomMessageTransfer::ID_LOCALE, HiddenType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],
@@ -87,5 +87,13 @@ class DiscountCustomMessagesType extends AbstractType
             ]);
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlockPrefix(): string
+    {
+        return 'discount_custom_messages';
     }
 }

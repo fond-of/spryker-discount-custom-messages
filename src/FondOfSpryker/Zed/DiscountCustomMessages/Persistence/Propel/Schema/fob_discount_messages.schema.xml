@@ -7,7 +7,7 @@
           package="src.Orm.Zed.DiscountLocalizedMessages.Persistence">
 
     <table name="fob_discount_localized_messages" idMethod="native" phpName="FobDiscountLocalizedMessages">
-        <column name="id_discount_localized_messages" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+        <column name="id_discount_localized_message" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
         <column name="fk_locale" required="true" type="INTEGER"/>
         <column name="fk_discount" required="true" type="INTEGER"/>
 

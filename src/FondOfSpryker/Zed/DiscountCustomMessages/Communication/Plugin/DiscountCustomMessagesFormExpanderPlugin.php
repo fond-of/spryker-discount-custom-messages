@@ -2,12 +2,15 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Plugin;
 
+use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use FondOfSpryker\Zed\DiscountCustomMessages\Communication\Form\DiscountCustomMessagesType;
+use FondOfSpryker\Zed\DiscountCustomMessages\Communication\Form\DiscountCustomMessageType;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 use Spryker\Zed\Discount\Dependency\Plugin\Form\DiscountFormExpanderPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
@@ -31,7 +34,7 @@ class DiscountCustomMessagesFormExpanderPlugin extends AbstractPlugin implements
     public function expandFormType(FormBuilderInterface $builder, array $options): FormBuilderInterface
     {
         $builder->add(DiscountConfiguratorTransfer::DISCOUNT_CUSTOM_MESSAGES, CollectionType::class, [
-            'entry_type' => DiscountCustomMessagesType::class,
+            'entry_type' => DiscountCustomMessageType::class,
         ]);
 
         return $builder;
