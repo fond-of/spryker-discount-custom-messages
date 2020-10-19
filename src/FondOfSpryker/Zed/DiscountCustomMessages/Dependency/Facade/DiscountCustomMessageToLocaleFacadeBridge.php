@@ -1,15 +1,13 @@
 <?php
 
-
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade;
-
 
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 
 class DiscountCustomMessageToLocaleFacadeBridge implements DiscountCustomMessageToLocaleFacadeInterface
 {
     /**
-     * @var LocaleFacadeInterface
+     * @var \Spryker\Zed\Locale\Business\LocaleFacadeInterface
      */
     private $localeFacade;
 

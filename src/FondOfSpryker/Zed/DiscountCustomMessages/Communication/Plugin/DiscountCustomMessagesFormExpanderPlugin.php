@@ -2,15 +2,12 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Plugin;
 
-use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use FondOfSpryker\Zed\DiscountCustomMessages\Communication\Form\DiscountCustomMessageType;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 use Spryker\Zed\Discount\Dependency\Plugin\Form\DiscountFormExpanderPluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()

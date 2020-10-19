@@ -21,9 +21,9 @@ class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyP
     }
 
     /**
-     * @param Container $container
-     * @return Container
-     * @throws \Spryker\Service\Container\Exception\FrozenServiceException
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
      */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
@@ -33,9 +33,9 @@ class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyP
     }
 
     /**
-     * @param Container $container
-     * @return Container
-     * @throws \Spryker\Service\Container\Exception\FrozenServiceException
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
      */
     protected function addLocaleFacade(Container $container): Container
     {

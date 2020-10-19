@@ -2,10 +2,10 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Plugin;
 
+use FondOfSpryker\Zed\Discount\Dependency\Form\DefaultDiscountCreateConfiguratorExpanderPluginInterface;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use FondOfSpryker\Zed\Discount\Dependency\Form\DefaultDiscountCreateConfiguratorExpanderPluginInterface;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
