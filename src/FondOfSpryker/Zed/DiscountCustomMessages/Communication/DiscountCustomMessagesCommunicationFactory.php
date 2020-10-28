@@ -8,6 +8,7 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface getQueryContainer()
  */
 class DiscountCustomMessagesCommunicationFactory extends AbstractCommunicationFactory
 {

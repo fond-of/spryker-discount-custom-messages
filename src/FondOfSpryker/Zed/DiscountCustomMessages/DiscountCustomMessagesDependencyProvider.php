@@ -37,6 +37,20 @@ class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyP
      *
      * @return \Spryker\Zed\Kernel\Container
      */
+    public function provideBusinessLayerDependencies(Container $container)
+    {
+        $container = parent::provideBusinessLayerDependencies($container);
+
+        $container = $this->addLocaleFacade($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
     protected function addLocaleFacade(Container $container): Container
     {
         $container->set(static::FACADE_LOCALE, function (Container $container) {

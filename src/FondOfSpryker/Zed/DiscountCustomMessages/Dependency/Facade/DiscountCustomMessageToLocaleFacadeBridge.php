@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade;
 
+use Generated\Shared\Transfer\LocaleTransfer;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 
 class DiscountCustomMessageToLocaleFacadeBridge implements DiscountCustomMessageToLocaleFacadeInterface
@@ -22,5 +23,16 @@ class DiscountCustomMessageToLocaleFacadeBridge implements DiscountCustomMessage
     public function getLocaleCollection(): array
     {
         return $this->localeFacade->getLocaleCollection();
+    }
+
+    /**
+     * @param int $idLocale
+     *
+     * @return \Generated\Shared\Transfer\LocaleTransfer
+     */
+    public function getLocaleById(int $idLocale): LocaleTransfer
+    {
+        return $this->localeFacade
+            ->getLocaleById($idLocale);
     }
 }
