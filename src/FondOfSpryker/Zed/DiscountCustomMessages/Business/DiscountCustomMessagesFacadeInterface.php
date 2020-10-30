@@ -14,4 +14,11 @@ interface DiscountCustomMessagesFacadeInterface
     public function expandDiscountConfigurationWithCustomMessages(
         DiscountConfiguratorTransfer $discountConfiguratorTransfer
     ): DiscountConfiguratorTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
+     */
+    public function postUpdate(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer;
 }

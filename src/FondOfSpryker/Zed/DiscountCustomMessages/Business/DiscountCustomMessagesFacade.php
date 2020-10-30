@@ -21,4 +21,16 @@ class DiscountCustomMessagesFacade extends AbstractFacade implements DiscountCus
             ->createDiscountCustomMessagesReader()
             ->expandDiscountCustomMessages($discountConfiguratorTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
+     */
+    public function postUpdate(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer
+    {
+        return $this->getFactory()
+            ->createDiscountCustomMessagesWriter()
+            ->updateDiscountCustomMessages($discountConfiguratorTransfer);
+    }
 }

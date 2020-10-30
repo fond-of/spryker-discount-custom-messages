@@ -3,18 +3,18 @@
 <database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           name="zed"
           xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd"
-          namespace="Orm\Zed\DiscountLocalizedMessages\Persistence"
-          package="src.Orm.Zed.DiscountLocalizedMessages.Persistence">
+          namespace="Orm\Zed\DiscountDiscountMessage\Persistence"
+          package="src.Orm.Zed.DiscountDiscountMessage.Persistence">
 
-    <table name="fob_discount_localized_messages" idMethod="native" phpName="FobDiscountLocalizedMessages">
-        <column name="id_discount_localized_message" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
+    <table name="fob_discount_custom_message" idMethod="native" phpName="FobDiscountCustomMessage">
+        <column name="id_discount_custom_message" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
         <column name="fk_locale" required="true" type="INTEGER"/>
         <column name="fk_discount" required="true" type="INTEGER"/>
 
         <column name="error_message" required="false" type="LONGVARCHAR"/>
         <column name="success_message" required="false" type="LONGVARCHAR"/>
 
-        <id-method-parameter value="fob_discount_localized_messages_pk_seq"/>
+        <id-method-parameter value="fob_discount_custom_message_pk_seq"/>
 
         <behavior name="timestampable"/>
 

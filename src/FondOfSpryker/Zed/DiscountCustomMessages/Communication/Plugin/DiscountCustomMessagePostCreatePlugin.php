@@ -4,7 +4,7 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Plugin;
 
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
-use Orm\Zed\DiscountLocalizedMessages\Persistence\FobDiscountLocalizedMessages;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 use Orm\Zed\Locale\Persistence\SpyLocale;
 use Spryker\Zed\Discount\Dependency\Plugin\DiscountPostCreatePluginInterface;
 
@@ -31,17 +31,17 @@ class DiscountCustomMessagePostCreatePlugin implements DiscountPostCreatePluginI
 
     /**
      * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
-     * @param \Orm\Zed\DiscountLocalizedMessages\Persistence\FobDiscountLocalizedMessages $discountLocalizedMessagesEntity
+     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage $discountCustomMessageEntity
      *
-     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
     protected function hydrateDiscountCustomMessageEntity(
         DiscountConfiguratorTransfer $discountConfiguratorTransfer,
-        FobDiscountLocalizedMessages $discountLocalizedMessagesEntity
+        FobDiscountCustomMessage $discountCustomMessageEntity
     ): DiscountConfiguratorTransfer {
         foreach ($discountConfiguratorTransfer->getDiscountCustomMessages() as $customMessageTransfer) {
-            $discountLocalizedMessagesEntity->fromArray($customMessageTransfer->toArray());
-            $discountLocalizedMessagesEntity->setLocale($this->hydrateLocaleEntity($customMessageTransfer->getLocale()));
+            $discountCustomMessageEntity->fromArray($customMessageTransfer->toArray());
+            $discountCustomMessageEntity->setLocale($this->hydrateLocaleEntity($customMessageTransfer->getLocale()));
         }
 
         return $discountConfiguratorTransfer;
@@ -61,11 +61,11 @@ class DiscountCustomMessagePostCreatePlugin implements DiscountPostCreatePluginI
     }
 
     /**
-     * @return \Orm\Zed\DiscountLocalizedMessages\Persistence\FobDiscountLocalizedMessages
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage
      */
-    protected function createDiscountCustomMessageEntity(): FobDiscountLocalizedMessages
+    protected function createDiscountCustomMessageEntity(): FobDiscountCustomMessage
     {
-        return new FobDiscountLocalizedMessages();
+        return new FobDiscountCustomMessage();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence;
 
+use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
@@ -13,12 +14,27 @@ class DiscountCustomMessagesQueryContainer extends AbstractQueryContainer implem
     /**
      * @param int $idDiscount
      *
-     * @return mixed|\Orm\Zed\DiscountLocalizedMessages\Persistence\FobDiscountLocalizedMessages[]|\Propel\Runtime\Collection\ObjectCollection
+     * @return mixed|\Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage[]|\Propel\Runtime\Collection\ObjectCollection
      */
     public function queryDiscountCustomMessagesByIdDiscount(int $idDiscount)
     {
         return $this->getFactory()
-            ->createDiscountPromotionQuery()
+            ->createDiscountCustomMessagesQuery()
             ->findByFkDiscount($idDiscount);
+    }
+
+    /**
+     * @param int $idDiscountCustomMessage
+     * @param int $idDiscount
+     *
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage|null
+     */
+    public function queryDiscountCustomMessageByIdAndIdDiscount(int $idDiscountCustomMessage, int $idDiscount): ?FobDiscountCustomMessage
+    {
+        return $this->getFactory()
+            ->createDiscountCustomMessagesQuery()
+            ->filterByIdDiscountCustomMessage($idDiscountCustomMessage)
+            ->filterByFkDiscount($idDiscount)
+            ->findOne();
     }
 }

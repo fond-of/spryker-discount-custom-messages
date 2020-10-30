@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence;
 
-use Orm\Zed\DiscountLocalizedMessages\Persistence\FobDiscountLocalizedMessagesQuery;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
@@ -11,10 +11,10 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class DiscountCustomMessagesPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\DiscountLocalizedMessages\Persistence\FobDiscountLocalizedMessagesQuery
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery
      */
-    public function createDiscountPromotionQuery(): FobDiscountLocalizedMessagesQuery
+    public function createDiscountCustomMessagesQuery(): FobDiscountCustomMessageQuery
     {
-        return FobDiscountLocalizedMessagesQuery::create();
+        return FobDiscountCustomMessageQuery::create();
     }
 }

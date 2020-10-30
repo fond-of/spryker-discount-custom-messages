@@ -5,9 +5,9 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper;
 interface DiscountCustomMessagesMapperInterface
 {
     /**
-     * @param array $discountCustomMessagesEntities
+     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage[]
      *
      * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer[]
      */
-    public function mapTransfer(array $discountCustomMessagesEntities): array;
+    public function mapTransfer(array $discountCustomMessageEntities): array;
 }

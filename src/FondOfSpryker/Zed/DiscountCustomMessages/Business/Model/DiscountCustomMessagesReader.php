@@ -67,7 +67,7 @@ class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterf
         $discountCustomMessagesEntities = $this->customMessagesQueryContainer
             ->queryDiscountCustomMessagesByIdDiscount($idDiscount);
 
-        if (!$discountCustomMessagesEntities) {
+        if (!$discountCustomMessagesEntities->getData()) {
             return $this->createEmptyMessages();
         }
 
@@ -92,6 +92,8 @@ class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterf
         foreach ($this->localeFacade->getLocaleCollection() as $localeTransfer) {
             $discountCustomMessageTransfer = $this->createDiscountCustomMessageTransfer();
             $discountCustomMessageTransfer->setLocale($localeTransfer);
+
+            $collection[] = $discountCustomMessageTransfer;
         }
 
         return $collection;

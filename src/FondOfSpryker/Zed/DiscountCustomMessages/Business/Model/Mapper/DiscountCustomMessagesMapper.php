@@ -21,19 +21,22 @@ class DiscountCustomMessagesMapper implements DiscountCustomMessagesMapperInterf
     }
 
     /**
-     * @param \Orm\Zed\DiscountLocalizedMessages\Persistence\FobDiscountLocalizedMessages[] $discountCustomMessagesEntities
+     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage[]
      *
      * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer[]
      */
-    public function mapTransfer(array $discountCustomMessagesEntities): array
+    public function mapTransfer(array $discountCustomMessageEntities): array
     {
         $collection = [];
 
-        foreach ($discountCustomMessagesEntities as $discountCustomMessagesEntity) {
+        foreach ($discountCustomMessageEntities as $discountCustomMessagesEntity) {
             $localeTransfer = $this->localeFacade->getLocaleById($discountCustomMessagesEntity->getFkLocale());
 
             $discountCustomMessageTransfer = $this->createDiscountCustomMessageTransfer();
             $discountCustomMessageTransfer->fromArray($discountCustomMessagesEntity->toArray(), true);
+            $discountCustomMessageTransfer->setIdDiscountCustomMessage($discountCustomMessagesEntity->getIdDiscountCustomMessage());
+            $discountCustomMessageTransfer->setIdLocale($discountCustomMessagesEntity->getFkLocale());
+            $discountCustomMessageTransfer->setIdDiscount($discountCustomMessagesEntity->getFkDiscount());
             $discountCustomMessageTransfer->setLocale($localeTransfer);
 
             $collection[] = $discountCustomMessageTransfer;
