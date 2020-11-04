@@ -20,4 +20,12 @@ interface DiscountCustomMessagesQueryContainerInterface
      * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage|null
      */
     public function queryDiscountCustomMessageByIdAndIdDiscount(int $idDiscountCustomMessage, int $idDiscount): ?FobDiscountCustomMessage;
+
+    /**
+     * @param int $idDiscount
+     * @param int $idLocale
+     *
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage|null
+     */
+    public function queryDiscountCustomMessageByIdDiscountAndIdLocale(int $idDiscount, int $idLocale): ?FobDiscountCustomMessage;
 }

@@ -46,93 +46,43 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
      */
     public function updateDiscountCustomMessages(
         DiscountConfiguratorTransfer $discountConfiguratorTransfer
-    ): DiscountConfiguratorTransfer {
-        if ($discountConfiguratorTransfer->getDiscountCustomMessages()->count() === 0) {
-            return $this->createDiscountMessagesByLocale($discountConfiguratorTransfer);
-        }
-
+    ): DiscountConfiguratorTransfer {$locales = $this->localeFacade->getLocaleCollection();
         foreach ($discountConfiguratorTransfer->getDiscountCustomMessages() as $discountCustomMessageTransfer) {
-            $idDiscountCustomMessage = $discountCustomMessageTransfer->getIdDiscountCustomMessage();
+            if (!$discountCustomMessageTransfer->getIdDiscountCustomMessage()) {
+                $discountCustomMessageEntity = $this->hydrateDiscountCustomMessageEntity(
+                    $this->createDiscountCustomMessageEntity(),
+                    $discountCustomMessageTransfer,
+                    $discountConfiguratorTransfer->getDiscountGeneral()->getIdDiscount()
+                );
 
-            if ($idDiscountCustomMessage === null) {
-                $this->saveNewEntity($discountConfiguratorTransfer, $discountCustomMessageTransfer);
+                $discountCustomMessageEntity->save();
 
                 continue;
             }
 
-            $this->saveExistingEntity($discountConfiguratorTransfer, $discountCustomMessageTransfer);
+            $discountCustomMessageEntity = $this->customMessagesQueryContainer
+                ->queryDiscountCustomMessageByIdAndIdDiscount(
+                    $discountCustomMessageTransfer->getIdDiscountCustomMessage(),
+                    $discountCustomMessageTransfer->getIdDiscount()
+                );
+
+            if ($discountCustomMessageEntity === null) {
+                continue;
+            }
+
+            $discountCustomMessageEntity->fromArray($discountCustomMessageTransfer->toArray());
+            $discountCustomMessageEntity->save();
         }
 
         return $discountConfiguratorTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
-     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
-     *
-     * @return void
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage
      */
-    protected function saveExistingEntity(
-        DiscountConfiguratorTransfer $discountConfiguratorTransfer,
-        DiscountCustomMessageTransfer $discountCustomMessageTransfer
-    ): void {
-        $idDiscount = $discountConfiguratorTransfer->getDiscountGeneral()->getIdDiscount();
-        $idDiscountCustomMessage = $discountCustomMessageTransfer->getIdDiscountCustomMessage();
-
-        $discountCustomMessageEntity = $this->customMessagesQueryContainer
-            ->queryDiscountCustomMessageByIdAndIdDiscount($idDiscountCustomMessage, $idDiscount);
-
-        if (!$discountCustomMessageEntity) {
-            return;
-        }
-
-        $discountCustomMessageEntity = $this->hydrateDiscountCustomMessageEntity(
-            $discountCustomMessageEntity,
-            $discountCustomMessageTransfer,
-            $idDiscount
-        );
-
-        $discountCustomMessageEntity->save();
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
-     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
-     *
-     * @return void
-     */
-    protected function saveNewEntity(
-        DiscountConfiguratorTransfer $discountConfiguratorTransfer,
-        DiscountCustomMessageTransfer $discountCustomMessageTransfer
-    ): void {
-        $discountCustomMessageEntity = $this->hydrateDiscountCustomMessageEntity(
-            new FobDiscountCustomMessage(),
-            $discountCustomMessageTransfer,
-            $discountConfiguratorTransfer->getDiscountGeneral()->getIdDiscount()
-        );
-
-        $discountCustomMessageEntity->save();
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
-     *
-     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
-     */
-    protected function createDiscountMessagesByLocale(DiscountConfiguratorTransfer $discountConfiguratorTransfer)
+    protected function createDiscountCustomMessageEntity(): FobDiscountCustomMessage
     {
-        $idDiscount = $discountConfiguratorTransfer->getDiscountGeneral()->setIdDiscount();
-
-        foreach ($this->localeFacade->getLocaleCollection() as $localeTransfer) {
-            $discountCustomMessageTransfer = new DiscountCustomMessageTransfer();
-            $discountCustomMessageTransfer->setLocale($localeTransfer);
-            $discountCustomMessageTransfer->setIdLocale($localeTransfer->getIdLocale());
-            $discountCustomMessageTransfer->setIdDiscount($idDiscount);
-
-            $discountConfiguratorTransfer->addDiscountCustomMessages($discountCustomMessageTransfer);
-        }
-
-        return $discountConfiguratorTransfer;
+        return new FobDiscountCustomMessage();
     }
 
     /**

@@ -4,13 +4,13 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Plugin;
 
 use FondOfSpryker\Zed\Discount\Dependency\Form\DefaultDiscountCreateConfiguratorExpanderPluginInterface;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
-use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Communication\DiscountCustomMessagesCommunicationFactory getFactory()
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface getQueryContainer()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
  */
 class DefaultDiscountCustomMessagesCreateFormDataExpanderPlugin extends AbstractPlugin implements DefaultDiscountCreateConfiguratorExpanderPluginInterface
 {
@@ -21,17 +21,6 @@ class DefaultDiscountCustomMessagesCreateFormDataExpanderPlugin extends Abstract
      */
     public function expandDefaultDiscountConfigurator(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer
     {
-        $locales = $this->getFactory()
-            ->getLocaleFacade()
-            ->getLocaleCollection();
-
-        foreach ($locales as $localeTransfer) {
-            $discountCustomMessageTransfer = new DiscountCustomMessageTransfer();
-            $discountCustomMessageTransfer->setLocale($localeTransfer);
-
-            $discountConfiguratorTransfer->addDiscountCustomMessages($discountCustomMessageTransfer);
-        }
-
-        return $discountConfiguratorTransfer;
+        return $this->getFacade()->expandDefaultDiscountConfigurator($discountConfiguratorTransfer);
     }
 }

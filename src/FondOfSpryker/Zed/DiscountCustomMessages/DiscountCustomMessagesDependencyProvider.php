@@ -3,12 +3,17 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages;
 
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeBridge;
+use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToMessengerFacadeBridge;
+use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Query\DiscountCustomMessagesToLocaleQueryContainerBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
 class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const FACADE_LOCALE = 'FACADE_LOCALE';
+    public const FACADE_MESSENGER = 'FACADE_MESSENGER';
+
+    public const QUERY_LOCALE = 'QUERY_LOCALE';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -28,6 +33,8 @@ class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyP
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = $this->addLocaleFacade($container);
+        $container = $this->addMessengerFacade($container);
+        $container = $this->addLocaleQueryContainer($container);
 
         return $container;
     }
@@ -39,9 +46,8 @@ class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyP
      */
     public function provideBusinessLayerDependencies(Container $container)
     {
-        $container = parent::provideBusinessLayerDependencies($container);
-
         $container = $this->addLocaleFacade($container);
+        $container = $this->addMessengerFacade($container);
 
         return $container;
     }
@@ -55,6 +61,36 @@ class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyP
     {
         $container->set(static::FACADE_LOCALE, function (Container $container) {
             return new DiscountCustomMessageToLocaleFacadeBridge($container->getLocator()->locale()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addMessengerFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_MESSENGER, function (Container $container) {
+            return new DiscountCustomMessageToMessengerFacadeBridge($container->getLocator()->messenger()->facade());
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addLocaleQueryContainer(Container $container): Container
+    {
+        $container->set(static::QUERY_LOCALE, function (Container $container) {
+            return new DiscountCustomMessagesToLocaleQueryContainerBridge(
+                $container->getLocator()->locale()->queryContainer()
+            );
         });
 
         return $container;

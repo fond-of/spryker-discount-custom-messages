@@ -3,12 +3,17 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Plugin;
 
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
-use Generated\Shared\Transfer\LocaleTransfer;
 use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
-use Orm\Zed\Locale\Persistence\SpyLocale;
 use Spryker\Zed\Discount\Dependency\Plugin\DiscountPostCreatePluginInterface;
+use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
-class DiscountCustomMessagePostCreatePlugin implements DiscountPostCreatePluginInterface
+/**
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Communication\DiscountCustomMessagesCommunicationFactory getFactory()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface getQueryContainer()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
+ */
+class DiscountCustomMessagePostCreatePlugin extends AbstractPlugin implements DiscountPostCreatePluginInterface
 {
     /**
      * Specification:
@@ -23,41 +28,31 @@ class DiscountCustomMessagePostCreatePlugin implements DiscountPostCreatePluginI
      */
     public function postCreate(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer
     {
-        return $this->hydrateDiscountCustomMessageEntity(
-            $discountConfiguratorTransfer,
-            $this->createDiscountCustomMessageEntity()
-        );
+        return $this->hydrateDiscountCustomMessageEntity($discountConfiguratorTransfer);
     }
 
     /**
      * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
-     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage $discountCustomMessageEntity
      *
      * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
     protected function hydrateDiscountCustomMessageEntity(
-        DiscountConfiguratorTransfer $discountConfiguratorTransfer,
-        FobDiscountCustomMessage $discountCustomMessageEntity
+        DiscountConfiguratorTransfer $discountConfiguratorTransfer
     ): DiscountConfiguratorTransfer {
         foreach ($discountConfiguratorTransfer->getDiscountCustomMessages() as $customMessageTransfer) {
+            $locale = $this->getFactory()
+                ->getLocaleQueryContainer()
+                ->queryLocaleByName($customMessageTransfer->getLocale()->getLocaleName())->findOne();
+
+            $discountCustomMessageEntity = $this->createDiscountCustomMessageEntity();
             $discountCustomMessageEntity->fromArray($customMessageTransfer->toArray());
-            $discountCustomMessageEntity->setLocale($this->hydrateLocaleEntity($customMessageTransfer->getLocale()));
+            $discountCustomMessageEntity->setLocale($locale);
+            $discountCustomMessageEntity->setFkDiscount($discountConfiguratorTransfer->getDiscountGeneral()->getIdDiscount());
+
+            $discountCustomMessageEntity->save();
         }
 
         return $discountConfiguratorTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\LocaleTransfer $localeTransfer
-     *
-     * @return \Orm\Zed\Locale\Persistence\SpyLocale
-     */
-    protected function hydrateLocaleEntity(LocaleTransfer $localeTransfer): SpyLocale
-    {
-        $localeEntity = $this->createLocaleEntity();
-        $localeEntity->fromArray($localeTransfer->toArray());
-
-        return $localeEntity;
     }
 
     /**
@@ -66,13 +61,5 @@ class DiscountCustomMessagePostCreatePlugin implements DiscountPostCreatePluginI
     protected function createDiscountCustomMessageEntity(): FobDiscountCustomMessage
     {
         return new FobDiscountCustomMessage();
-    }
-
-    /**
-     * @return \Orm\Zed\Locale\Persistence\SpyLocale
-     */
-    protected function createLocaleEntity(): SpyLocale
-    {
-        return new SpyLocale();
     }
 }

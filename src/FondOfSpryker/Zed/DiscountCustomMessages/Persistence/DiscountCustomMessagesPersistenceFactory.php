@@ -7,6 +7,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface getQueryContainer()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
  */
 class DiscountCustomMessagesPersistenceFactory extends AbstractPersistenceFactory
 {

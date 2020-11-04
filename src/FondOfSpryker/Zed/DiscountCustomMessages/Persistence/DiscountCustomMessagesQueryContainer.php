@@ -37,4 +37,19 @@ class DiscountCustomMessagesQueryContainer extends AbstractQueryContainer implem
             ->filterByFkDiscount($idDiscount)
             ->findOne();
     }
+
+    /**
+     * @param int $idDiscount
+     * @param int $idLocale
+     *
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage|null
+     */
+    public function queryDiscountCustomMessageByIdDiscountAndIdLocale(int $idDiscount, int $idLocale): ?FobDiscountCustomMessage
+    {
+        return $this->getFactory()
+            ->createDiscountCustomMessagesQuery()
+            ->filterByFkDiscount($idDiscount)
+            ->filterByFkLocale($idLocale)
+            ->findOne();
+    }
 }

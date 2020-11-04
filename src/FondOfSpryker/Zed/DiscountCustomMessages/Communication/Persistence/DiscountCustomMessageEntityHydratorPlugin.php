@@ -9,6 +9,9 @@ use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 use Orm\Zed\Locale\Persistence\SpyLocale;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
+/**
+ * * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface getQueryContainer()
+ */
 class DiscountCustomMessageEntityHydratorPlugin extends AbstractPlugin implements DiscountEntityHydratorPluginInterface
 {
     /**
@@ -20,11 +23,23 @@ class DiscountCustomMessageEntityHydratorPlugin extends AbstractPlugin implement
     public function hydrateDiscountEntity(DiscountConfiguratorTransfer $discountConfiguratorTransfer, SpyDiscount $discountEntity): DiscountConfiguratorTransfer
     {
         foreach ($discountConfiguratorTransfer->getDiscountCustomMessages() as $customMessageTransfer) {
-            $discountCustomMessageEntity = $this->createDiscountCustomMessageEntity();
-            $discountCustomMessageEntity->setLocale($this->createLocaleEntity()->fromArray($customMessageTransfer->getLocale()->toArray()));
-            $discountCustomMessageEntity->setSuccessMessage($customMessageTransfer->getSuccessMessage());
-            $discountCustomMessageEntity->setErrorMessage($customMessageTransfer->getErrorMessage());
-            $discountCustomMessageEntity->setFkLocale($customMessageTransfer->getLocale()->getIdLocale());
+            $discountCustomMessageEntity = $this->getQueryContainer()->queryDiscountCustomMessageByIdAndIdDiscount(
+                $customMessageTransfer->getIdDiscountCustomMessage(),
+                $customMessageTransfer->getIdDiscount()
+            );
+
+            if ($discountCustomMessageEntity === null) {
+                $discountCustomMessageEntity = $this->createDiscountCustomMessageEntity();
+                $discountCustomMessageEntity
+                    ->setSuccessMessage($customMessageTransfer->getSuccessMessage())
+                    ->setErrorMessage($customMessageTransfer->getErrorMessage())
+                    ->setFkLocale($customMessageTransfer->getLocale()->getIdLocale())
+                    ->setLocale($this->createLocaleEntity()->fromArray(
+                        $customMessageTransfer->getLocale()->toArray()
+                    ));
+            }
+
+            $discountCustomMessageEntity->fromArray($customMessageTransfer->toArray());
 
             $discountEntity->addFobDiscountCustomMessage($discountCustomMessageEntity);
         }

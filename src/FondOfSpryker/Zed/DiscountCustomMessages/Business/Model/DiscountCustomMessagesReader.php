@@ -7,6 +7,7 @@ use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMes
 use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
+use Generated\Shared\Transfer\DiscountTransfer;
 
 class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterface
 {
@@ -71,7 +72,31 @@ class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterf
             return $this->createEmptyMessages();
         }
 
-        return $this->discountCustomMessagesMapper->mapTransfer($discountCustomMessagesEntities->getData());
+        return $this->discountCustomMessagesMapper->mapTransferCollection($discountCustomMessagesEntities->getData());
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\DiscountTransfer $discountTransfer
+     *
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer|null
+     */
+    public function findCustomMessageByIdDiscountAndCurrentLocale(DiscountTransfer $discountTransfer): ?DiscountCustomMessageTransfer
+    {
+        if (!$discountTransfer->getIdDiscount()) {
+            return null;
+        }
+
+        $discountCustomMessagesEntity = $this->customMessagesQueryContainer
+            ->queryDiscountCustomMessageByIdDiscountAndIdLocale(
+                $discountTransfer->getIdDiscount(),
+                $this->localeFacade->getCurrentLocale()->getIdLocale()
+            );
+
+        if ($discountCustomMessagesEntity === null) {
+            return null;
+        }
+
+        return $this->discountCustomMessagesMapper->mapTransfer($discountCustomMessagesEntity);
     }
 
     /**
