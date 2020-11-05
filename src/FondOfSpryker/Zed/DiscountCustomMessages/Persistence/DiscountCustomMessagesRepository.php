@@ -69,6 +69,7 @@ class DiscountCustomMessagesRepository extends AbstractRepository implements Dis
     {
         $discountCustomMessageEntity = $this->getFactory()
             ->getDiscountCustomMessagesQuery()
+            ->clear()
             ->filterByFkDiscount($idDiscount)
             ->filterByFkLocale($idLocale)
             ->findOne();

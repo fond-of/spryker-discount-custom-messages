@@ -51,16 +51,21 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
             $discountTransfer
         );
 
-        if ($discountCustomMessageTransfer === null) {
+        if ($discountCustomMessageTransfer === null || !$discountCustomMessageTransfer->getSuccessMessage()) {
+            $messageTransfer = $this->createMessageTransfer(
+                $this->customMessagesConfig->getDefaultSuccessMessage(),
+                ['display_name' => $discountTransfer->getDisplayName()]
+            );
+
+            $this->messengerFacade->addSuccessMessage($messageTransfer);
+
             return;
         }
 
-        $value = $discountCustomMessageTransfer->getSuccessMessage()
-            ?: $this->customMessagesConfig->getDefaultSuccessMessage();
-
-        $messageTransfer = $this->createMessageTransfer($value, [
-            'display_name' => $discountTransfer->getDisplayName(),
-        ]);
+        $messageTransfer = $this->createMessageTransfer(
+            $discountCustomMessageTransfer->getSuccessMessage(),
+            ['display_name' => $discountTransfer->getDisplayName()]
+        );
 
         $this->messengerFacade->addSuccessMessage($messageTransfer);
     }
@@ -76,16 +81,21 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
             $discountTransfer
         );
 
-        if ($discountCustomMessageTransfer === null) {
+        if ($discountCustomMessageTransfer === null || !$discountCustomMessageTransfer->getErrorMessage()) {
+            $messageTransfer = $this->createMessageTransfer(
+                $this->customMessagesConfig->getDefaultErrorMessage(),
+                ['display_name' => $discountTransfer->getDisplayName()]
+            );
+
+            $this->messengerFacade->addErrorMessage($messageTransfer);
+
             return;
         }
 
-        $value = $discountCustomMessageTransfer->getErrorMessage()
-            ?: $this->customMessagesConfig->getDefaultErrorMessage();
-
-        $messageTransfer = $this->createMessageTransfer($value, [
-            'display_name' => $discountTransfer->getDisplayName(),
-        ]);
+        $messageTransfer = $this->createMessageTransfer(
+            $discountCustomMessageTransfer->getErrorMessage(),
+            ['display_name' => $discountTransfer->getDisplayName()]
+        );
 
         $this->messengerFacade->addErrorMessage($messageTransfer);
     }
