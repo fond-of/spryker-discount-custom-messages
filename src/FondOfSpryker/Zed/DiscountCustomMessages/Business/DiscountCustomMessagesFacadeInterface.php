@@ -3,7 +3,6 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Business;
 
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
-use Generated\Shared\Transfer\DiscountTransfer;
 
 interface DiscountCustomMessagesFacadeInterface
 {
@@ -29,4 +28,13 @@ interface DiscountCustomMessagesFacadeInterface
      * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
     public function postUpdate(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer;
+
+    /**
+     * @param DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return DiscountConfiguratorTransfer
+     */
+    public function createDiscountCustomMessages(
+        DiscountConfiguratorTransfer $discountConfiguratorTransfer)
+    : DiscountConfiguratorTransfer;
 }

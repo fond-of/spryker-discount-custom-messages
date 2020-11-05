@@ -39,7 +39,7 @@ class DiscountCustomMessageToMessengerFacadeBridge implements DiscountCustomMess
     }
 
     /**
-     * @return FlashMessagesTransfer
+     * @return \Generated\Shared\Transfer\FlashMessagesTransfer
      */
     public function getStoredMessages(): FlashMessagesTransfer
     {

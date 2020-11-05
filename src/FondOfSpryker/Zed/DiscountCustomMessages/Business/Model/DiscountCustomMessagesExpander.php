@@ -26,8 +26,8 @@ class DiscountCustomMessagesExpander implements DiscountCustomMessagesExpanderIn
     public function expandDefaultDiscountConfigurator(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer
     {
         foreach ($this->localeFacade->getLocaleCollection() as $localeTransfer) {
-            $discountCustomMessageTransfer = new DiscountCustomMessageTransfer();
-            $discountCustomMessageTransfer->setLocale($localeTransfer);
+            $discountCustomMessageTransfer = (new DiscountCustomMessageTransfer())
+                ->setLocale($localeTransfer);
 
             $discountConfiguratorTransfer->addDiscountCustomMessages($discountCustomMessageTransfer);
         }

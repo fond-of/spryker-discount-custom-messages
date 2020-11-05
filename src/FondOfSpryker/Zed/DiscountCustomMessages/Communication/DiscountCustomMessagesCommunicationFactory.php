@@ -15,9 +15,8 @@ use FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesDependencyPro
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 
 /**
- * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
- * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface getQueryContainer()
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface getRepository()
  */
 class DiscountCustomMessagesCommunicationFactory extends AbstractCommunicationFactory
 {
@@ -55,7 +54,7 @@ class DiscountCustomMessagesCommunicationFactory extends AbstractCommunicationFa
     public function createDiscountCustomMessagesReader(): DiscountCustomMessagesReaderInterface
     {
         return new DiscountCustomMessagesReader(
-            $this->getQueryContainer(),
+            $this->getRepository(),
             $this->createDiscountCustomMessagesMapper(),
             $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE)
         );

@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Business;
 
+use Everon\Component\Factory\Dependency\Container;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesExpander;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesExpanderInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesReader;
@@ -10,13 +11,14 @@ use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessag
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesWriterInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapper;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface;
+use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToMessengerFacadeInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
- * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface getQueryContainer()
- * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface getRepository()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface getEntityManager()
  */
 class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
 {
@@ -25,9 +27,7 @@ class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
      */
     public function createDiscountCustomMessagesExpander(): DiscountCustomMessagesExpanderInterface
     {
-        return new DiscountCustomMessagesExpander(
-            $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE)
-        );
+        return new DiscountCustomMessagesExpander($this->getLocaleFacade());
     }
 
     /**
@@ -36,9 +36,9 @@ class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
     public function createDiscountCustomMessagesReader(): DiscountCustomMessagesReaderInterface
     {
         return new DiscountCustomMessagesReader(
-            $this->getQueryContainer(),
+            $this->getRepository(),
             $this->createDiscountCustomMessagesMapper(),
-            $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE)
+            $this->getLocaleFacade()
         );
     }
 
@@ -48,9 +48,10 @@ class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
     public function createDiscountCustomMessagesWriter(): DiscountCustomMessagesWriterInterface
     {
         return new DiscountCustomMessagesWriter(
-            $this->getQueryContainer(),
+            $this->getRepository(),
             $this->createDiscountCustomMessagesMapper(),
-            $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE)
+            $this->getLocaleFacade(),
+            $this->getEntityManager()
         );
     }
 
@@ -59,9 +60,7 @@ class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
      */
     public function createDiscountCustomMessagesMapper(): DiscountCustomMessagesMapperInterface
     {
-        return new DiscountCustomMessagesMapper(
-            $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE)
-        );
+        return new DiscountCustomMessagesMapper($this->getLocaleFacade());
     }
 
     /**
@@ -70,5 +69,15 @@ class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
     public function getMessengerFacade(): DiscountCustomMessageToMessengerFacadeInterface
     {
         return $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_MESSENGER);
+    }
+
+    /**
+     * @param Container $container
+     * @return DiscountCustomMessageToLocaleFacadeInterface
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function getLocaleFacade(): DiscountCustomMessageToLocaleFacadeInterface
+    {
+        return $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE);
     }
 }

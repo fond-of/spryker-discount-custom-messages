@@ -4,7 +4,8 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Business\Model;
 
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface;
-use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface;
+use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface;
+use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
@@ -12,9 +13,9 @@ use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterface
 {
     /**
-     * @var \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface
+     * @var DiscountCustomMessagesRepositoryInterface
      */
-    protected $customMessagesQueryContainer;
+    protected $discountCustomMessagesRepository;
 
     /**
      * @var \FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface
@@ -27,16 +28,41 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
     protected $localeFacade;
 
     /**
-     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface $customMessagesQueryContainer
+     * @var DiscountCustomMessagesEntityManagerInterface
+     */
+    protected $customMessageEntityManager;
+
+    /**
+     * @param DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository
+     * @param DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
+     * @param DiscountCustomMessageToLocaleFacadeInterface $localeFacade
      */
     public function __construct(
-        DiscountCustomMessagesQueryContainerInterface $customMessagesQueryContainer,
+        DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository,
         DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper,
-        DiscountCustomMessageToLocaleFacadeInterface $localeFacade
+        DiscountCustomMessageToLocaleFacadeInterface $localeFacade,
+        DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager
     ) {
-        $this->customMessagesQueryContainer = $customMessagesQueryContainer;
+        $this->discountCustomMessagesRepository = $discountCustomMessagesRepository;
         $this->discountCustomMessagesMapper = $discountCustomMessagesMapper;
         $this->localeFacade = $localeFacade;
+        $this->customMessageEntityManager = $customMessageEntityManager;
+    }
+
+    /**
+     * @param DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return DiscountConfiguratorTransfer
+     */
+    public function createByDiscountConfiguratorTransfer(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer
+    {
+        foreach ($discountConfiguratorTransfer->getDiscountCustomMessages() as $discountCustomMessageTransfer) {
+            $discountCustomMessageTransfer->setIdDiscount($discountConfiguratorTransfer->getDiscountGeneral()->getIdDiscount());
+
+            $this->customMessageEntityManager->create($discountCustomMessageTransfer);
+        }
+
+        return $discountConfiguratorTransfer;
     }
 
     /**
@@ -44,65 +70,21 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
      *
      * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
-    public function updateDiscountCustomMessages(
+    public function update(
         DiscountConfiguratorTransfer $discountConfiguratorTransfer
-    ): DiscountConfiguratorTransfer {$locales = $this->localeFacade->getLocaleCollection();
+    ): DiscountConfiguratorTransfer {
         foreach ($discountConfiguratorTransfer->getDiscountCustomMessages() as $discountCustomMessageTransfer) {
             if (!$discountCustomMessageTransfer->getIdDiscountCustomMessage()) {
-                $discountCustomMessageEntity = $this->hydrateDiscountCustomMessageEntity(
-                    $this->createDiscountCustomMessageEntity(),
-                    $discountCustomMessageTransfer,
-                    $discountConfiguratorTransfer->getDiscountGeneral()->getIdDiscount()
-                );
-
-                $discountCustomMessageEntity->save();
+                $this->customMessageEntityManager
+                    ->create($discountCustomMessageTransfer);
 
                 continue;
             }
 
-            $discountCustomMessageEntity = $this->customMessagesQueryContainer
-                ->queryDiscountCustomMessageByIdAndIdDiscount(
-                    $discountCustomMessageTransfer->getIdDiscountCustomMessage(),
-                    $discountCustomMessageTransfer->getIdDiscount()
-                );
-
-            if ($discountCustomMessageEntity === null) {
-                continue;
-            }
-
-            $discountCustomMessageEntity->fromArray($discountCustomMessageTransfer->toArray());
-            $discountCustomMessageEntity->save();
+            $this->customMessageEntityManager
+                ->update($discountCustomMessageTransfer);
         }
 
         return $discountConfiguratorTransfer;
-    }
-
-    /**
-     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage
-     */
-    protected function createDiscountCustomMessageEntity(): FobDiscountCustomMessage
-    {
-        return new FobDiscountCustomMessage();
-    }
-
-    /**
-     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage $discountCustomMessageEntity
-     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
-     * @param int $idDiscount
-     *
-     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage
-     */
-    protected function hydrateDiscountCustomMessageEntity(
-        FobDiscountCustomMessage $discountCustomMessageEntity,
-        DiscountCustomMessageTransfer $discountCustomMessageTransfer,
-        int $idDiscount
-    ): FobDiscountCustomMessage {
-        $discountCustomMessageEntity->fromArray($discountCustomMessageTransfer->toArray());
-        $discountCustomMessageEntity->setFkDiscount($idDiscount);
-        $discountCustomMessageEntity->setSuccessMessage($discountCustomMessageTransfer->getSuccessMessage());
-        $discountCustomMessageEntity->setErrorMessage($discountCustomMessageTransfer->getErrorMessage());
-        $discountCustomMessageEntity->setFkLocale($discountCustomMessageTransfer->getLocale()->getIdLocale());
-
-        return $discountCustomMessageEntity;
     }
 }

@@ -3,12 +3,11 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Business;
 
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
-use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
-use Generated\Shared\Transfer\DiscountTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesBusinessFactory getFactory()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface getRepository()
  */
 class DiscountCustomMessagesFacade extends AbstractFacade implements DiscountCustomMessagesFacadeInterface
 {
@@ -45,6 +44,20 @@ class DiscountCustomMessagesFacade extends AbstractFacade implements DiscountCus
     {
         return $this->getFactory()
             ->createDiscountCustomMessagesWriter()
-            ->updateDiscountCustomMessages($discountConfiguratorTransfer);
+            ->update($discountConfiguratorTransfer);
+    }
+
+    /**
+     * @param DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return DiscountConfiguratorTransfer
+     */
+    public function createDiscountCustomMessages(
+        DiscountConfiguratorTransfer $discountConfiguratorTransfer)
+    : DiscountConfiguratorTransfer
+    {
+        return $this->getFactory()
+            ->createDiscountCustomMessagesWriter()
+            ->createByDiscountConfiguratorTransfer($discountConfiguratorTransfer);
     }
 }

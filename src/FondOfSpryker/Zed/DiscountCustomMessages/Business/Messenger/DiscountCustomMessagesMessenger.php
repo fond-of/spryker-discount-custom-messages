@@ -95,9 +95,9 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
      */
     protected function createMessageTransfer(string $value, array $params): MessageTransfer
     {
-        $messageTransfer = new MessageTransfer();
-        $messageTransfer->setValue($value);
-        $messageTransfer->setParameters($params);
+        $messageTransfer = (new MessageTransfer())
+            ->setValue($value)
+            ->setParameters($params);
 
         return $messageTransfer;
     }

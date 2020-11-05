@@ -19,7 +19,7 @@ class DiscountCustomMessagesQueryContainer extends AbstractQueryContainer implem
     public function queryDiscountCustomMessagesByIdDiscount(int $idDiscount)
     {
         return $this->getFactory()
-            ->createDiscountCustomMessagesQuery()
+            ->getDiscountCustomMessagesQuery()
             ->findByFkDiscount($idDiscount);
     }
 
@@ -32,7 +32,7 @@ class DiscountCustomMessagesQueryContainer extends AbstractQueryContainer implem
     public function queryDiscountCustomMessageByIdAndIdDiscount(int $idDiscountCustomMessage, int $idDiscount): ?FobDiscountCustomMessage
     {
         return $this->getFactory()
-            ->createDiscountCustomMessagesQuery()
+            ->getDiscountCustomMessagesQuery()
             ->filterByIdDiscountCustomMessage($idDiscountCustomMessage)
             ->filterByFkDiscount($idDiscount)
             ->findOne();
@@ -47,7 +47,7 @@ class DiscountCustomMessagesQueryContainer extends AbstractQueryContainer implem
     public function queryDiscountCustomMessageByIdDiscountAndIdLocale(int $idDiscount, int $idLocale): ?FobDiscountCustomMessage
     {
         return $this->getFactory()
-            ->createDiscountCustomMessagesQuery()
+            ->getDiscountCustomMessagesQuery()
             ->filterByFkDiscount($idDiscount)
             ->filterByFkLocale($idLocale)
             ->findOne();
