@@ -3,6 +3,7 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence\Propel\Mapper;
 
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
+use Generated\Shared\Transfer\LocaleTransfer;
 use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 
 class DiscountCustomMessageMapper implements DiscountCustomMessageMapperInterface
@@ -33,6 +34,12 @@ class DiscountCustomMessageMapper implements DiscountCustomMessageMapperInterfac
         DiscountCustomMessageTransfer $discountCustomMessageTransfer
     ): DiscountCustomMessageTransfer {
         $discountCustomMessageTransfer->fromArray($discountCustomMessageEntity->toArray(), true);
+        $localeTransfer = (new LocaleTransfer())->fromArray($discountCustomMessageEntity->getLocale()->toArray());
+
+        $discountCustomMessageTransfer
+            ->setIdDiscount($discountCustomMessageEntity->getFkDiscount())
+            ->setLocale($localeTransfer)
+            ->setIdLocale($localeTransfer->getIdLocale());
 
         return $discountCustomMessageTransfer;
     }
