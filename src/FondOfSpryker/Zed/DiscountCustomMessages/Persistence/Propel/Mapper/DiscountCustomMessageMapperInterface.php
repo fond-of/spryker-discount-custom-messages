@@ -13,10 +13,10 @@ interface DiscountCustomMessageMapperInterface
     ): FobDiscountCustomMessage;
 
     /**
-     * @param FobDiscountCustomMessage $discountCustomMessageEntity
-     * @param DiscountCustomMessageTransfer $discountCustomMessageTransfer
+     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage $discountCustomMessageEntity
+     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
      *
-     * @return DiscountCustomMessageTransfer
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer
      */
     public function mapEntityToTransfer(
         FobDiscountCustomMessage $discountCustomMessageEntity,

@@ -8,7 +8,7 @@ use Spryker\Zed\Locale\Persistence\LocaleRepositoryInterface;
 class DiscountCustomMessagesToLocaleRepositoryBridge implements DiscountCustomMessagesToLocaleRepositoryInterface
 {
     /**
-     * @var LocaleRepositoryInterface
+     * @var \Spryker\Zed\Locale\Persistence\LocaleRepositoryInterface
      */
     protected $localeRepository;
 

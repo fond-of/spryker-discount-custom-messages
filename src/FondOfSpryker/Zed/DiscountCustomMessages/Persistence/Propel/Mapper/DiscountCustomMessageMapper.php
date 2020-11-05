@@ -7,8 +7,10 @@ use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 
 class DiscountCustomMessageMapper implements DiscountCustomMessageMapperInterface
 {
-    public function mapTransferToEntity(DiscountCustomMessageTransfer $discountCustomMessageTransfer, FobDiscountCustomMessage $discountCustomMessageEntity): FobDiscountCustomMessage
-    {
+    public function mapTransferToEntity(
+        DiscountCustomMessageTransfer $discountCustomMessageTransfer,
+        FobDiscountCustomMessage $discountCustomMessageEntity
+    ): FobDiscountCustomMessage {
         $discountCustomMessageEntity->fromArray(
             $discountCustomMessageTransfer->toArray(true)
         );
@@ -21,13 +23,15 @@ class DiscountCustomMessageMapper implements DiscountCustomMessageMapperInterfac
     }
 
     /**
-     * @param FobDiscountCustomMessage $discountCustomMessageEntity
-     * @param DiscountCustomMessageTransfer $discountCustomMessageTransfer
+     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage $discountCustomMessageEntity
+     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
      *
-     * @return DiscountCustomMessageTransfer
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer
      */
-    public function mapEntityToTransfer(FobDiscountCustomMessage $discountCustomMessageEntity, DiscountCustomMessageTransfer $discountCustomMessageTransfer): DiscountCustomMessageTransfer
-    {
+    public function mapEntityToTransfer(
+        FobDiscountCustomMessage $discountCustomMessageEntity,
+        DiscountCustomMessageTransfer $discountCustomMessageTransfer
+    ): DiscountCustomMessageTransfer {
         $discountCustomMessageTransfer->fromArray($discountCustomMessageEntity->toArray(), true);
 
         return $discountCustomMessageTransfer;

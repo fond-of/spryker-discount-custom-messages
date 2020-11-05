@@ -4,7 +4,6 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Business\Model;
 
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface;
-use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesQueryContainerInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
@@ -23,14 +22,14 @@ class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterf
     protected $localeFacade;
 
     /**
-     * @var DiscountCustomMessagesRepositoryInterface
+     * @var \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface
      */
     protected $discountCustomMessagesRepository;
 
     /**
-     * @param DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository
-     * @param DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
-     * @param DiscountCustomMessageToLocaleFacadeInterface $localeFacade
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface $localeFacade
      */
     public function __construct(
         DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository,

@@ -7,13 +7,11 @@ use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMes
 use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
-use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 
 class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterface
 {
     /**
-     * @var DiscountCustomMessagesRepositoryInterface
+     * @var \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface
      */
     protected $discountCustomMessagesRepository;
 
@@ -28,14 +26,14 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
     protected $localeFacade;
 
     /**
-     * @var DiscountCustomMessagesEntityManagerInterface
+     * @var \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface
      */
     protected $customMessageEntityManager;
 
     /**
-     * @param DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository
-     * @param DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
-     * @param DiscountCustomMessageToLocaleFacadeInterface $localeFacade
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface $localeFacade
      */
     public function __construct(
         DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository,
@@ -50,9 +48,9 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
     }
 
     /**
-     * @param DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
      *
-     * @return DiscountConfiguratorTransfer
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
     public function createByDiscountConfiguratorTransfer(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer
     {

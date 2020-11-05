@@ -7,14 +7,14 @@ use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 interface DiscountCustomMessagesEntityManagerInterface
 {
     /**
-     * @param DiscountCustomMessageTransfer $discountCustomMessageTransfer
+     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
      *
      * @return void
      */
     public function create(DiscountCustomMessageTransfer $discountCustomMessageTransfer): void;
 
     /**
-     * @param DiscountCustomMessageTransfer $discountCustomMessageTransfer
+     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
      *
      * @return void
      */

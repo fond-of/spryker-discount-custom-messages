@@ -2,7 +2,6 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Business;
 
-use Everon\Component\Factory\Dependency\Container;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesExpander;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesExpanderInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesReader;
@@ -19,6 +18,7 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface getRepository()
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface getEntityManager()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
  */
 class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
 {
@@ -72,9 +72,9 @@ class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @param Container $container
-     * @return DiscountCustomMessageToLocaleFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @param \Everon\Component\Factory\Dependency\Container $container
+     *
+     * @return \FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface
      */
     public function getLocaleFacade(): DiscountCustomMessageToLocaleFacadeInterface
     {

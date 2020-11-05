@@ -3,14 +3,13 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence;
 
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 
 interface DiscountCustomMessagesRepositoryInterface
 {
     /**
      * @param int $idDiscount
      *
-     * @return DiscountCustomMessageTransfer[]
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer[]
      */
     public function findDiscountCustomMessagesByIdDiscount(int $idDiscount): array;
 
@@ -18,7 +17,7 @@ interface DiscountCustomMessagesRepositoryInterface
      * @param int $idDiscountCustomMessage
      * @param int $idDiscount
      *
-     * @return DiscountCustomMessageTransfer|null
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer|null
      */
     public function findDiscountCustomMessageByIdAndIdDiscount(int $idDiscountCustomMessage, int $idDiscount): ?DiscountCustomMessageTransfer;
 
@@ -26,7 +25,7 @@ interface DiscountCustomMessagesRepositoryInterface
      * @param int $idDiscount
      * @param int $idLocale
      *
-     * @return DiscountCustomMessageTransfer|null
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer|null
      */
     public function findDiscountCustomMessageByIdDiscountAndIdLocale(int $idDiscount, int $idLocale): ?DiscountCustomMessageTransfer;
 

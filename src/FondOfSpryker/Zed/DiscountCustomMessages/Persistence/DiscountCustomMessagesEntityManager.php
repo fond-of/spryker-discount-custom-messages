@@ -12,8 +12,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 class DiscountCustomMessagesEntityManager extends AbstractEntityManager implements DiscountCustomMessagesEntityManagerInterface
 {
     /**
-     * @param DiscountCustomMessageTransfer $discountCustomMessageTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
+     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
      *
      * @return void
      */
@@ -26,9 +25,7 @@ class DiscountCustomMessagesEntityManager extends AbstractEntityManager implemen
     }
 
     /**
-     * @param DiscountCustomMessageTransfer $discountCustomMessageTransfer
-     *
-     * @throws \Propel\Runtime\Exception\PropelException
+     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
      *
      * @return void
      */

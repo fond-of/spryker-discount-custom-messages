@@ -3,12 +3,13 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Communication\Plugin;
 
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
 use Spryker\Zed\Discount\Dependency\Plugin\DiscountPostCreatePluginInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesFacadeInterface getFacade()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Communication\DiscountCustomMessagesCommunicationFactory getFactory()
  */
 class DiscountCustomMessagePostCreatePlugin extends AbstractPlugin implements DiscountPostCreatePluginInterface
 {

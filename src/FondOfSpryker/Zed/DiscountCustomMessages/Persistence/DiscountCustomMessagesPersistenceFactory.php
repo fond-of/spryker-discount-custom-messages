@@ -8,6 +8,11 @@ use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\Propel\Mapper\DiscountC
 use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
+/**
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface getEntityManager()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\DiscountCustomMessagesConfig getConfig()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface getRepository()
+ */
 class DiscountCustomMessagesPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
@@ -19,7 +24,7 @@ class DiscountCustomMessagesPersistenceFactory extends AbstractPersistenceFactor
     }
 
     /**
-     * @return DiscountCustomMessageMapperInterface
+     * @return \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\Propel\Mapper\DiscountCustomMessageMapperInterface
      */
     public function createDiscountCustomMessageMapper(): DiscountCustomMessageMapperInterface
     {

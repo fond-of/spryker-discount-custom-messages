@@ -30,11 +30,11 @@ interface DiscountCustomMessagesFacadeInterface
     public function postUpdate(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer;
 
     /**
-     * @param DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
      *
-     * @return DiscountConfiguratorTransfer
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
     public function createDiscountCustomMessages(
-        DiscountConfiguratorTransfer $discountConfiguratorTransfer)
-    : DiscountConfiguratorTransfer;
+        DiscountConfiguratorTransfer $discountConfiguratorTransfer
+    ): DiscountConfiguratorTransfer;
 }

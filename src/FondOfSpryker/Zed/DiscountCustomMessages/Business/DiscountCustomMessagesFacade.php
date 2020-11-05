@@ -8,6 +8,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesBusinessFactory getFactory()
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface getRepository()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface getEntityManager()
  */
 class DiscountCustomMessagesFacade extends AbstractFacade implements DiscountCustomMessagesFacadeInterface
 {
@@ -48,14 +49,13 @@ class DiscountCustomMessagesFacade extends AbstractFacade implements DiscountCus
     }
 
     /**
-     * @param DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
      *
-     * @return DiscountConfiguratorTransfer
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
     public function createDiscountCustomMessages(
-        DiscountConfiguratorTransfer $discountConfiguratorTransfer)
-    : DiscountConfiguratorTransfer
-    {
+        DiscountConfiguratorTransfer $discountConfiguratorTransfer
+    ): DiscountConfiguratorTransfer {
         return $this->getFactory()
             ->createDiscountCustomMessagesWriter()
             ->createByDiscountConfiguratorTransfer($discountConfiguratorTransfer);
