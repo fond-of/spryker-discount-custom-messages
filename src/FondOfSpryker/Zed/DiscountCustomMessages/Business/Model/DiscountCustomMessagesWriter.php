@@ -11,11 +11,6 @@ use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterface
 {
     /**
-     * @var \FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface
-     */
-    protected $discountCustomMessagesMapper;
-
-    /**
      * @var \FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface
      */
     protected $localeFacade;
@@ -27,15 +22,12 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
 
     /**
      * @param DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager
-     * @param DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
      * @param DiscountCustomMessageToLocaleFacadeInterface $localeFacade
      */
     public function __construct(
         DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager,
-        DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper,
         DiscountCustomMessageToLocaleFacadeInterface $localeFacade
     ) {
-        $this->discountCustomMessagesMapper = $discountCustomMessagesMapper;
         $this->localeFacade = $localeFacade;
         $this->customMessageEntityManager = $customMessageEntityManager;
     }
