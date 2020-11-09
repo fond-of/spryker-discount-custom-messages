@@ -16,9 +16,4 @@ interface DiscountCustomMessageToMessengerFacadeInterface
      * @param \Generated\Shared\Transfer\MessageTransfer $messageTransfer
      */
     public function addSuccessMessage(MessageTransfer $messageTransfer): void;
-
-    /**
-     * @return \Generated\Shared\Transfer\FlashMessagesTransfer
-     */
-    public function getStoredMessages(): FlashMessagesTransfer;
 }

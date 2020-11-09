@@ -31,7 +31,6 @@ class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterf
     ) {
         $this->discountCustomMessagesRepository = $discountCustomMessagesRepository;
         $this->localeFacade = $localeFacade;
-
     }
 
     /**
@@ -49,23 +48,6 @@ class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterf
         }
 
         return $discountConfiguratorTransfer;
-    }
-
-    /**
-     * @param int $idDiscount
-     *
-     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer[]
-     */
-    public function findDiscountCustomMessagesByIdDiscount(int $idDiscount): array
-    {
-        $discountCustomMessagesEntities = $this->discountCustomMessagesRepository
-            ->findDiscountCustomMessagesByIdDiscount($idDiscount);
-
-        if (!$discountCustomMessagesEntities) {
-            return $this->createEmptyMessages();
-        }
-
-        return $discountCustomMessagesEntities;
     }
 
     /**
@@ -90,6 +72,23 @@ class DiscountCustomMessagesReader implements DiscountCustomMessagesReaderInterf
         }
 
         return $discountCustomMessagesTransfer;
+    }
+
+    /**
+     * @param int $idDiscount
+     *
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer[]
+     */
+    protected function findDiscountCustomMessagesByIdDiscount(int $idDiscount): array
+    {
+        $discountCustomMessagesTransfers = $this->discountCustomMessagesRepository
+            ->findDiscountCustomMessagesByIdDiscount($idDiscount);
+
+        if (!$discountCustomMessagesTransfers) {
+            return $this->createEmptyMessages();
+        }
+
+        return $discountCustomMessagesTransfers;
     }
 
     /**

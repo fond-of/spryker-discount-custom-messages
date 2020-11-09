@@ -16,13 +16,6 @@ interface DiscountCustomMessagesReaderInterface
     public function expandDiscountCustomMessages(DiscountConfiguratorTransfer $discountConfiguratorTransfer);
 
     /**
-     * @param int $idDiscount
-     *
-     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer[]
-     */
-    public function findDiscountCustomMessagesByIdDiscount(int $idDiscount): array;
-
-    /**
      * @param \Generated\Shared\Transfer\DiscountTransfer $discountTransfer
      *
      * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer|null

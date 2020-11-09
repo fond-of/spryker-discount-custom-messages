@@ -11,7 +11,7 @@ class DiscountCustomMessageToMessengerFacadeBridge implements DiscountCustomMess
     /**
      * @var \Spryker\Zed\Messenger\Business\MessengerFacadeInterface
      */
-    private $messengerFacade;
+    protected $messengerFacade;
 
     public function __construct(MessengerFacadeInterface $messengerFacade)
     {
@@ -36,13 +36,5 @@ class DiscountCustomMessageToMessengerFacadeBridge implements DiscountCustomMess
     public function addSuccessMessage(MessageTransfer $messageTransfer): void
     {
         $this->messengerFacade->addSuccessMessage($messageTransfer);
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\FlashMessagesTransfer
-     */
-    public function getStoredMessages(): FlashMessagesTransfer
-    {
-        return $this->messengerFacade->getStoredMessages();
     }
 }
