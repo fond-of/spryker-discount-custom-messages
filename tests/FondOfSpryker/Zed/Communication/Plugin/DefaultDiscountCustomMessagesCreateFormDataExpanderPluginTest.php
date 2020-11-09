@@ -11,7 +11,7 @@ class DefaultDiscountCustomMessagesCreateFormDataExpanderPluginTest extends Unit
     /**
      * @return void
      */
-    public function expandDefaultDiscountConfigurator(): void
+    public function testExpandDefaultDiscountConfigurator(): void
     {
         $plugin = new DefaultDiscountCustomMessagesCreateFormDataExpanderPlugin();
         $discountConfiguratorTransferMock = $this->getMockBuilder(DiscountConfiguratorTransfer::class)->getMock();

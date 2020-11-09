@@ -48,10 +48,9 @@ class DiscountCustomMessagesBusinessFactory extends AbstractBusinessFactory
     public function createDiscountCustomMessagesWriter(): DiscountCustomMessagesWriterInterface
     {
         return new DiscountCustomMessagesWriter(
-            $this->getRepository(),
+            $this->getEntityManager(),
             $this->createDiscountCustomMessagesMapper(),
-            $this->getLocaleFacade(),
-            $this->getEntityManager()
+            $this->getLocaleFacade()
         );
     }
 

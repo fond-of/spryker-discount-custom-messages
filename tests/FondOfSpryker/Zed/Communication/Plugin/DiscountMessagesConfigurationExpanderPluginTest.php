@@ -11,7 +11,7 @@ class DiscountMessagesConfigurationExpanderPluginTest extends Unit
     /**
      * @return void
      */
-    public function expandTest(): void
+    public function testExpand(): void
     {
         $plugin = new DiscountMessagesConfigurationExpanderPlugin();
         $facadeMock = $this->getMockBuilder(DiscountCustomMessagesFacade::class)->getMock();
@@ -22,5 +22,7 @@ class DiscountMessagesConfigurationExpanderPluginTest extends Unit
         $facadeMock->expects($this->once())
             ->method('expandDiscountConfigurationWithCustomMessages')
             ->with($discountConfiguratorTransferMock);
+
+        $plugin->expand($discountConfiguratorTransferMock);
     }
 }

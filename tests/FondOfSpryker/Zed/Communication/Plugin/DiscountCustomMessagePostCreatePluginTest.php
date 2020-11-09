@@ -11,7 +11,7 @@ class DiscountCustomMessagePostCreatePluginTest extends Unit
     /**
      * @return void
      */
-    public function postCreateTest(): void
+    public function testPostCreate(): void
     {
         $plugin = new DiscountCustomMessagePostCreatePlugin();
         $facadeMock = $this->getMockBuilder(DiscountCustomMessagesFacade::class)->getMock();

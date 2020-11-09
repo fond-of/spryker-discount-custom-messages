@@ -11,11 +11,6 @@ use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterface
 {
     /**
-     * @var \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface
-     */
-    protected $discountCustomMessagesRepository;
-
-    /**
      * @var \FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface
      */
     protected $discountCustomMessagesMapper;
@@ -31,17 +26,15 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
     protected $customMessageEntityManager;
 
     /**
-     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository
-     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
-     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface $localeFacade
+     * @param DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager
+     * @param DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper
+     * @param DiscountCustomMessageToLocaleFacadeInterface $localeFacade
      */
     public function __construct(
-        DiscountCustomMessagesRepositoryInterface $discountCustomMessagesRepository,
+        DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager,
         DiscountCustomMessagesMapperInterface $discountCustomMessagesMapper,
-        DiscountCustomMessageToLocaleFacadeInterface $localeFacade,
-        DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager
+        DiscountCustomMessageToLocaleFacadeInterface $localeFacade
     ) {
-        $this->discountCustomMessagesRepository = $discountCustomMessagesRepository;
         $this->discountCustomMessagesMapper = $discountCustomMessagesMapper;
         $this->localeFacade = $localeFacade;
         $this->customMessageEntityManager = $customMessageEntityManager;
@@ -73,6 +66,10 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
     ): DiscountConfiguratorTransfer {
         foreach ($discountConfiguratorTransfer->getDiscountCustomMessages() as $discountCustomMessageTransfer) {
             if (!$discountCustomMessageTransfer->getIdDiscountCustomMessage()) {
+                $discountCustomMessageTransfer->setIdDiscount(
+                    $discountConfiguratorTransfer->getDiscountGeneral()->getIdDiscount()
+                );
+
                 $this->customMessageEntityManager
                     ->create($discountCustomMessageTransfer);
 
