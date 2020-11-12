@@ -7,9 +7,23 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
  * @method \FondOfSpryker\Zed\DiscountCustomMessages\Business\DiscountCustomMessagesBusinessFactory getFactory()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface getRepository()
+ * @method \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface getEntityManager()
  */
 class DiscountCustomMessagesFacade extends AbstractFacade implements DiscountCustomMessagesFacadeInterface
 {
+    /**
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
+     */
+    public function expandDefaultDiscountConfigurator(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer
+    {
+        return $this->getFactory()
+            ->createDiscountCustomMessagesExpander()
+            ->expandDefaultDiscountConfigurator($discountConfiguratorTransfer);
+    }
+
     /**
      * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
      *
@@ -31,6 +45,19 @@ class DiscountCustomMessagesFacade extends AbstractFacade implements DiscountCus
     {
         return $this->getFactory()
             ->createDiscountCustomMessagesWriter()
-            ->updateDiscountCustomMessages($discountConfiguratorTransfer);
+            ->update($discountConfiguratorTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
+     */
+    public function createDiscountCustomMessages(
+        DiscountConfiguratorTransfer $discountConfiguratorTransfer
+    ): DiscountConfiguratorTransfer {
+        return $this->getFactory()
+            ->createDiscountCustomMessagesWriter()
+            ->createByDiscountConfiguratorTransfer($discountConfiguratorTransfer);
     }
 }

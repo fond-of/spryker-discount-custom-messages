@@ -18,6 +18,14 @@ class DiscountCustomMessageToLocaleFacadeBridge implements DiscountCustomMessage
     }
 
     /**
+     * @return \Generated\Shared\Transfer\LocaleTransfer
+     */
+    public function getCurrentLocale(): LocaleTransfer
+    {
+        return $this->localeFacade->getCurrentLocale();
+    }
+
+    /**
      * @return \Generated\Shared\Transfer\LocaleTransfer[]
      */
     public function getLocaleCollection(): array

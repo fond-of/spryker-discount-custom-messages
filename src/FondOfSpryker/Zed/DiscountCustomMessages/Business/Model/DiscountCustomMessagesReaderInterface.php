@@ -3,6 +3,8 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Business\Model;
 
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
+use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
+use Generated\Shared\Transfer\DiscountTransfer;
 
 interface DiscountCustomMessagesReaderInterface
 {
@@ -14,9 +16,9 @@ interface DiscountCustomMessagesReaderInterface
     public function expandDiscountCustomMessages(DiscountConfiguratorTransfer $discountConfiguratorTransfer);
 
     /**
-     * @param int $idDiscount
+     * @param \Generated\Shared\Transfer\DiscountTransfer $discountTransfer
      *
-     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer[]
+     * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer|null
      */
-    public function findDiscountCustomMessagesByIdDiscount(int $idDiscount): array;
+    public function findCustomMessageByIdDiscountAndCurrentLocale(DiscountTransfer $discountTransfer): ?DiscountCustomMessageTransfer;
 }

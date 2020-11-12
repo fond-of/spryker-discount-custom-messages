@@ -11,7 +11,12 @@ interface DiscountCustomMessagesWriterInterface
      *
      * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
      */
-    public function updateDiscountCustomMessages(
-        DiscountConfiguratorTransfer $discountConfiguratorTransfer
-    ): DiscountConfiguratorTransfer;
+    public function createByDiscountConfiguratorTransfer(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\DiscountConfiguratorTransfer $discountConfiguratorTransfer
+     *
+     * @return \Generated\Shared\Transfer\DiscountConfiguratorTransfer
+     */
+    public function update(DiscountConfiguratorTransfer $discountConfiguratorTransfer): DiscountConfiguratorTransfer;
 }
