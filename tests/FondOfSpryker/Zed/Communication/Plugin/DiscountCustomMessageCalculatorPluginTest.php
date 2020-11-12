@@ -80,14 +80,27 @@ class DiscountCustomMessageCalculatorPluginTest extends Unit
             ->willReturn($this->discountCustomMessagesMessengerMock);
 
         $this->discountCustomMessagesMessengerMock->expects($this->once())
-            ->method('addSuccessMessage');
+            ->method('addSuccessMessageFromDiscountTransfer');
 
         $this->plugin->addSuccessMessageFromDiscountTransfer($this->discountTransferMock);
     }
 
     /**
-     * @retun void
-     *
+     * @return void
+     */
+    public function testAddSuccessMessageFromString(): void
+    {
+        $this->factoryMock->expects($this->once())
+            ->method('createDiscountCustomMessagesMessenger')
+            ->willReturn($this->discountCustomMessagesMessengerMock);
+
+        $this->discountCustomMessagesMessengerMock->expects($this->once())
+            ->method('addSuccessMessageFromString');
+
+        $this->plugin->addSuccessMessageFromString('foo bar');
+    }
+
+    /**
      * @return void
      */
     public function testAddErrorMessage(): void
@@ -97,9 +110,24 @@ class DiscountCustomMessageCalculatorPluginTest extends Unit
             ->willReturn($this->discountCustomMessagesMessengerMock);
 
         $this->discountCustomMessagesMessengerMock->expects($this->once())
-            ->method('addErrorMessage')
+            ->method('addErrorMessageFromDiscountTransfer')
             ->with($this->discountTransferMock);
 
         $this->plugin->addErrorMessageFromDiscountTransfer($this->discountTransferMock);
+    }
+
+    /**
+     * @return void
+     */
+    public function testAddVoucherNotFoundErrorMessage(): void
+    {
+        $this->factoryMock->expects($this->once())
+            ->method('createDiscountCustomMessagesMessenger')
+            ->willReturn($this->discountCustomMessagesMessengerMock);
+
+        $this->discountCustomMessagesMessengerMock->expects($this->once())
+            ->method('addVoucherNotFoundErrorMessage');
+
+        $this->plugin->addVoucherNotFoundErrorMessage();
     }
 }
