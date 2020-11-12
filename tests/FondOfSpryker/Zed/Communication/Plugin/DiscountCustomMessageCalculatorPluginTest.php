@@ -82,7 +82,7 @@ class DiscountCustomMessageCalculatorPluginTest extends Unit
         $this->discountCustomMessagesMessengerMock->expects($this->once())
             ->method('addSuccessMessage');
 
-        $this->plugin->addSuccessMessage($this->discountTransferMock);
+        $this->plugin->addSuccessMessageFromDiscountTransfer($this->discountTransferMock);
     }
 
     /**
@@ -100,6 +100,6 @@ class DiscountCustomMessageCalculatorPluginTest extends Unit
             ->method('addErrorMessage')
             ->with($this->discountTransferMock);
 
-        $this->plugin->addErrorMessage($this->discountTransferMock);
+        $this->plugin->addErrorMessageFromDiscountTransfer($this->discountTransferMock);
     }
 }

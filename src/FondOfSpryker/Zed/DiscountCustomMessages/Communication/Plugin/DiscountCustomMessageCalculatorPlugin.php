@@ -18,11 +18,11 @@ class DiscountCustomMessageCalculatorPlugin extends AbstractPlugin implements Cu
      *
      * @return void
      */
-    public function addSuccessMessage(DiscountTransfer $discountTransfer): void
+    public function addSuccessMessageFromDiscountTransfer(DiscountTransfer $discountTransfer): void
     {
         $this->getFactory()
             ->createDiscountCustomMessagesMessenger()
-            ->addSuccessMessage($discountTransfer);
+            ->addSuccessMessageFromDiscountTransfer($discountTransfer);
     }
 
     /**
@@ -30,10 +30,30 @@ class DiscountCustomMessageCalculatorPlugin extends AbstractPlugin implements Cu
      *
      * @return void
      */
-    public function addErrorMessage(DiscountTransfer $discountTransfer): void
+    public function addErrorMessageFromDiscountTransfer(DiscountTransfer $discountTransfer): void
     {
         $this->getFactory()
             ->createDiscountCustomMessagesMessenger()
-            ->addErrorMessage($discountTransfer);
+            ->addErrorMessageFromDiscountTransfer($discountTransfer);
+    }
+
+    /**
+     * @param string $successMessage
+     */
+    public function addSuccessMessageFromString(string $successMessage): void
+    {
+        $this->getFactory()
+            ->createDiscountCustomMessagesMessenger()
+            ->addSuccessMessageFromString($successMessage);
+    }
+
+    /**
+     * @param string $errorMessage
+     */
+    public function addVoucherNotFoundErrorMessage(): void
+    {
+        $this->getFactory()
+            ->createDiscountCustomMessagesMessenger()
+            ->addVoucherNotFoundErrorMessage();
     }
 }

@@ -45,7 +45,7 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
      *
      * @return void
      */
-    public function addSuccessMessage(DiscountTransfer $discountTransfer): void
+    public function addSuccessMessageFromDiscountTransfer(DiscountTransfer $discountTransfer): void
     {
         $discountCustomMessageTransfer = $this->customMessagesReader->findCustomMessageByIdDiscountAndCurrentLocale(
             $discountTransfer
@@ -75,19 +75,14 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
      *
      * @return void
      */
-    public function addErrorMessage(DiscountTransfer $discountTransfer): void
+    public function addErrorMessageFromDiscountTransfer(DiscountTransfer $discountTransfer): void
     {
         $discountCustomMessageTransfer = $this->customMessagesReader->findCustomMessageByIdDiscountAndCurrentLocale(
             $discountTransfer
         );
 
         if ($discountCustomMessageTransfer === null || !$discountCustomMessageTransfer->getErrorMessage()) {
-            $messageTransfer = $this->createMessageTransfer(
-                $this->customMessagesConfig->getDefaultErrorMessage(),
-                ['display_name' => $discountTransfer->getDisplayName()]
-            );
-
-            $this->messengerFacade->addErrorMessage($messageTransfer);
+            $this->addVoucherNotFoundErrorMessage();
 
             return;
         }
@@ -110,5 +105,32 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
             ->setParameters($params);
 
         return $messageTransfer;
+    }
+
+    /**
+     * @param string $successMessage
+     *
+     * @return void
+     */
+    public function addSuccessMessageFromString(string $successMessage): void
+    {
+        $messageTransfer = $this->createMessageTransfer(
+            $successMessage, []
+        );
+
+        $this->messengerFacade->addSuccessMessage($messageTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function addVoucherNotFoundErrorMessage(): void
+    {
+        $messageTransfer = $this->createMessageTransfer(
+            $this->customMessagesConfig->getDefaultErrorMessage(),
+            []
+        );
+
+        $this->messengerFacade->addErrorMessage($messageTransfer);
     }
 }
