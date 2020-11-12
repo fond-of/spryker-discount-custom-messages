@@ -6,8 +6,6 @@ use FondOfSpryker\Zed\DiscountCustomMessages\Business\Messenger\DiscountCustomMe
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Messenger\DiscountCustomMessagesMessengerInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesReader;
 use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\DiscountCustomMessagesReaderInterface;
-use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapper;
-use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToMessengerFacadeInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Query\DiscountCustomMessagesToLocaleQueryContainerInterface;
@@ -57,17 +55,6 @@ class DiscountCustomMessagesCommunicationFactory extends AbstractCommunicationFa
     {
         return new DiscountCustomMessagesReader(
             $this->getRepository(),
-            $this->createDiscountCustomMessagesMapper(),
-            $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE)
-        );
-    }
-
-    /**
-     * @return \FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface
-     */
-    public function createDiscountCustomMessagesMapper(): DiscountCustomMessagesMapperInterface
-    {
-        return new DiscountCustomMessagesMapper(
             $this->getProvidedDependency(DiscountCustomMessagesDependencyProvider::FACADE_LOCALE)
         );
     }

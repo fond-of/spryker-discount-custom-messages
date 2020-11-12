@@ -2,10 +2,8 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Business\Model;
 
-use FondOfSpryker\Zed\DiscountCustomMessages\Business\Model\Mapper\DiscountCustomMessagesMapperInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface;
 use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface;
-use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesRepositoryInterface;
 use Generated\Shared\Transfer\DiscountConfiguratorTransfer;
 
 class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterface
@@ -21,8 +19,8 @@ class DiscountCustomMessagesWriter implements DiscountCustomMessagesWriterInterf
     protected $customMessageEntityManager;
 
     /**
-     * @param DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager
-     * @param DiscountCustomMessageToLocaleFacadeInterface $localeFacade
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Persistence\DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager
+     * @param \FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeInterface $localeFacade
      */
     public function __construct(
         DiscountCustomMessagesEntityManagerInterface $customMessageEntityManager,

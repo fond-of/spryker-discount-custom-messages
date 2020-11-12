@@ -2,7 +2,6 @@
 
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade;
 
-use Generated\Shared\Transfer\FlashMessagesTransfer;
 use Generated\Shared\Transfer\MessageTransfer;
 use Spryker\Zed\Messenger\Business\MessengerFacadeInterface;
 

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade;
-
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\MessageTransfer;
@@ -11,7 +9,7 @@ use Spryker\Zed\Messenger\Business\MessengerFacadeInterface;
 class DiscountCustomMessageToMessengerFacadeBridgeTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|MessengerFacadeInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Messenger\Business\MessengerFacadeInterface
      */
     protected $messengerFacadeMock;
 

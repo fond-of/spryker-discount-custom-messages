@@ -9,7 +9,7 @@ use Spryker\Zed\Locale\Persistence\LocaleQueryContainerInterface;
 class DiscountCustomMessagesToLocaleQueryContainerBridgeTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|LocaleQueryContainerInterface
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Locale\Persistence\LocaleQueryContainerInterface
      */
     protected $localeQueryContainerMock;
 
@@ -19,12 +19,14 @@ class DiscountCustomMessagesToLocaleQueryContainerBridgeTest extends Unit
     protected $bridge;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SpyLocaleQuery
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\Locale\Persistence\SpyLocaleQuery
      */
     protected $spyLocaleQuery;
 
     /**
      * @retun void
+     *
+     * @return void
      */
     protected function _before(): void
     {
@@ -41,6 +43,8 @@ class DiscountCustomMessagesToLocaleQueryContainerBridgeTest extends Unit
 
     /**
      * @retun void
+     *
+     * @return void
      */
     public function testQueryLocaleByName(): void
     {
