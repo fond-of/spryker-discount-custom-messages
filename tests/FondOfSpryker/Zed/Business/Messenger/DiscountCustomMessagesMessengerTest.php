@@ -90,7 +90,7 @@ class DiscountCustomMessagesMessengerTest extends Unit
         $this->messengerFacadeMock->expects($this->once())
             ->method('addSuccessMessage');
 
-        $this->discountCustomMessagesMessenger->addSuccessMessage($this->discountTransferMock);
+        $this->discountCustomMessagesMessenger->addSuccessMessageFromDiscountTransfer($this->discountTransferMock);
     }
 
     /**
@@ -107,7 +107,7 @@ class DiscountCustomMessagesMessengerTest extends Unit
             ->method('getDefaultSuccessMessage')
             ->willReturn('success');
 
-        $this->discountCustomMessagesMessenger->addSuccessMessage($this->discountTransferMock);
+        $this->discountCustomMessagesMessenger->addSuccessMessageFromDiscountTransfer($this->discountTransferMock);
     }
 
     /**
@@ -127,7 +127,7 @@ class DiscountCustomMessagesMessengerTest extends Unit
         $this->messengerFacadeMock->expects($this->once())
             ->method('addErrorMessage');
 
-        $this->discountCustomMessagesMessenger->addErrorMessage($this->discountTransferMock);
+        $this->discountCustomMessagesMessenger->addErrorMessageFromDiscountTransfer($this->discountTransferMock);
     }
 
     /**
@@ -144,6 +144,6 @@ class DiscountCustomMessagesMessengerTest extends Unit
             ->method('getDefaultErrorMessage')
             ->willReturn('error');
 
-        $this->discountCustomMessagesMessenger->addErrorMessage($this->discountTransferMock);
+        $this->discountCustomMessagesMessenger->addErrorMessageFromDiscountTransfer($this->discountTransferMock);
     }
 }
