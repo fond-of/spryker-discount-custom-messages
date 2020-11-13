@@ -18,8 +18,7 @@
   ],
   "require": {
     "php": ">=7.2",
-    "spryker/discount": "^9.2.0",
-    "fond-of-spryker/discount": "dev-feature/dev",
+    "fond-of-spryker/discount": "^1.0",
     "spryker/messenger": "^3.1.0",
     "spryker/locale": "^3.2.0"
   },
