@@ -39,6 +39,8 @@ class DiscountCustomMessageCalculatorPlugin extends AbstractPlugin implements Cu
 
     /**
      * @param string $successMessage
+     *
+     * @return void
      */
     public function addSuccessMessageFromString(string $successMessage): void
     {
@@ -49,6 +51,8 @@ class DiscountCustomMessageCalculatorPlugin extends AbstractPlugin implements Cu
 
     /**
      * @param string $errorMessage
+     *
+     * @return void
      */
     public function addVoucherNotFoundErrorMessage(): void
     {
