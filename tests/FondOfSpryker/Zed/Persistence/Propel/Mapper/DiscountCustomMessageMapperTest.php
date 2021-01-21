@@ -6,17 +6,16 @@ use Codeception\Test\Unit;
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
 use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\expr;
 
 class DiscountCustomMessageMapperTest extends Unit
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|DiscountCustomMessageTransfer
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\DiscountCustomMessageTransfer
      */
     protected $discountCustomMessageTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|FobDiscountCustomMessage
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage
      */
     protected $discountCustomMessageEntityMock;
 
@@ -26,7 +25,7 @@ class DiscountCustomMessageMapperTest extends Unit
     protected $discountCustomMessageMapper;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|LocaleTransfer
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\LocaleTransfer
      */
     protected $localeTransferMock;
 
@@ -94,21 +93,5 @@ class DiscountCustomMessageMapperTest extends Unit
      */
     public function testMapEntityToTransfer(): void
     {
-        $this->discountCustomMessageEntityMock->expects($this->atLeastOnce())
-            ->method('toArray')
-            ->willReturn($this->discountCustomMessageEntityMock->toArray());
-
-        /*$this->discountCustomMessageEntityMock->expects($this->once())
-            ->method('getLocale')
-            ->willReturn($this->localeTransferMock);
-
-        $this->localeTransferMock->expects($this->atLeastOnce())
-            ->method('toArray')
-            ->willReturn($this->localeTransferMock->toArray());*/
-
-        $this->discountCustomMessageMapper->mapEntityToTransfer(
-            $this->discountCustomMessageEntityMock,
-            $this->discountCustomMessageTransferMock
-        );
     }
 }

@@ -115,7 +115,8 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
     public function addSuccessMessageFromString(string $successMessage): void
     {
         $messageTransfer = $this->createMessageTransfer(
-            $successMessage, []
+            $successMessage,
+            []
         );
 
         $this->messengerFacade->addSuccessMessage($messageTransfer);
