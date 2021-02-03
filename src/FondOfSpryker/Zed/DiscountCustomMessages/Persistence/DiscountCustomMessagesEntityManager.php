@@ -3,7 +3,7 @@
 namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence;
 
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -20,7 +20,7 @@ class DiscountCustomMessagesEntityManager extends AbstractEntityManager implemen
     {
         $this->getFactory()
             ->createDiscountCustomMessageMapper()
-            ->mapTransferToEntity($discountCustomMessageTransfer, new FobDiscountCustomMessage())
+            ->mapTransferToEntity($discountCustomMessageTransfer, new FooDiscountCustomMessage())
             ->save();
     }
 

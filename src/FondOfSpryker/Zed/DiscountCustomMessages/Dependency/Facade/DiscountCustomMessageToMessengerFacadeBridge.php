@@ -12,6 +12,9 @@ class DiscountCustomMessageToMessengerFacadeBridge implements DiscountCustomMess
      */
     protected $messengerFacade;
 
+    /**
+     * @param \Spryker\Zed\Messenger\Business\MessengerFacadeInterface $messengerFacade
+     */
     public function __construct(MessengerFacadeInterface $messengerFacade)
     {
         $this->messengerFacade = $messengerFacade;

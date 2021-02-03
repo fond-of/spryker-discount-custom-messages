@@ -4,14 +4,20 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence\Propel\Mapper;
 
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage;
 
 class DiscountCustomMessageMapper implements DiscountCustomMessageMapperInterface
 {
+    /**
+     * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
+     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage $discountCustomMessageEntity
+     *
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage
+     */
     public function mapTransferToEntity(
         DiscountCustomMessageTransfer $discountCustomMessageTransfer,
-        FobDiscountCustomMessage $discountCustomMessageEntity
-    ): FobDiscountCustomMessage {
+        FooDiscountCustomMessage $discountCustomMessageEntity
+    ): FooDiscountCustomMessage {
         $discountCustomMessageEntity->fromArray(
             $discountCustomMessageTransfer->toArray(true)
         );
@@ -24,13 +30,13 @@ class DiscountCustomMessageMapper implements DiscountCustomMessageMapperInterfac
     }
 
     /**
-     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage $discountCustomMessageEntity
+     * @param \Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage $discountCustomMessageEntity
      * @param \Generated\Shared\Transfer\DiscountCustomMessageTransfer $discountCustomMessageTransfer
      *
      * @return \Generated\Shared\Transfer\DiscountCustomMessageTransfer
      */
     public function mapEntityToTransfer(
-        FobDiscountCustomMessage $discountCustomMessageEntity,
+        FooDiscountCustomMessage $discountCustomMessageEntity,
         DiscountCustomMessageTransfer $discountCustomMessageTransfer
     ): DiscountCustomMessageTransfer {
         $discountCustomMessageTransfer->fromArray($discountCustomMessageEntity->toArray(), true);

@@ -5,7 +5,7 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence\Propel\Mapper;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use Generated\Shared\Transfer\LocaleTransfer;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage;
 
 class DiscountCustomMessageMapperTest extends Unit
 {
@@ -15,7 +15,7 @@ class DiscountCustomMessageMapperTest extends Unit
     protected $discountCustomMessageTransferMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage
      */
     protected $discountCustomMessageEntityMock;
 
@@ -38,7 +38,7 @@ class DiscountCustomMessageMapperTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->discountCustomMessageEntityMock = $this->getMockBuilder(FobDiscountCustomMessage::class)
+        $this->discountCustomMessageEntityMock = $this->getMockBuilder(FooDiscountCustomMessage::class)
             ->disableOriginalConstructor()
             ->setMethods(['fromArray', 'toArray', 'setFkLocale', 'setFkDiscount', 'getLocale'])
             ->getMockForAbstractClass();

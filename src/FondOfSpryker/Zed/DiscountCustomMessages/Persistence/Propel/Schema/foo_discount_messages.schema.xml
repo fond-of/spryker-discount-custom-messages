@@ -6,7 +6,7 @@
           namespace="Orm\Zed\DiscountDiscountMessage\Persistence"
           package="src.Orm.Zed.DiscountDiscountMessage.Persistence">
 
-    <table name="fob_discount_custom_message" idMethod="native" phpName="FobDiscountCustomMessage">
+    <table name="foo_discount_custom_message" idMethod="native" phpName="FooDiscountCustomMessage">
         <column name="id_discount_custom_message" required="true" type="INTEGER" autoIncrement="true" primaryKey="true"/>
         <column name="fk_locale" required="true" type="INTEGER"/>
         <column name="fk_discount" required="true" type="INTEGER"/>
@@ -14,7 +14,7 @@
         <column name="error_message" required="false" type="LONGVARCHAR"/>
         <column name="success_message" required="false" type="LONGVARCHAR"/>
 
-        <id-method-parameter value="fob_discount_custom_message_pk_seq"/>
+        <id-method-parameter value="foo_discount_custom_message_pk_seq"/>
 
         <behavior name="timestampable"/>
 

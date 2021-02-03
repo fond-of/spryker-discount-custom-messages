@@ -32,7 +32,7 @@ interface DiscountCustomMessagesRepositoryInterface
     /**
      * @param int $idDiscountCustomMessage
      *
-     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage|null
+     * @return \Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage|null
      */
     public function findDiscountCustomMessageById(int $idDiscountCustomMessage): ?DiscountCustomMessageTransfer;
 }
