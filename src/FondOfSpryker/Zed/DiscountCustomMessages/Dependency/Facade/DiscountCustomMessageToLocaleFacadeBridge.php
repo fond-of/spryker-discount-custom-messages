@@ -12,6 +12,9 @@ class DiscountCustomMessageToLocaleFacadeBridge implements DiscountCustomMessage
      */
     private $localeFacade;
 
+    /**
+     * @param \Spryker\Zed\Locale\Business\LocaleFacadeInterface $localeFacade
+     */
     public function __construct(LocaleFacadeInterface $localeFacade)
     {
         $this->localeFacade = $localeFacade;

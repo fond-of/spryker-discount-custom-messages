@@ -96,7 +96,10 @@ class DiscountCustomMessagesMessenger implements DiscountCustomMessagesMessenger
     }
 
     /**
-     * @return void
+     * @param string $value
+     * @param array $params
+     *
+     * @return \Generated\Shared\Transfer\MessageTransfer
      */
     protected function createMessageTransfer(string $value, array $params): MessageTransfer
     {

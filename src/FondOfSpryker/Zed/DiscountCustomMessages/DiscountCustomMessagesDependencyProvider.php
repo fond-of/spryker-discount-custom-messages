@@ -5,7 +5,7 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToLocaleFacadeBridge;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Facade\DiscountCustomMessageToMessengerFacadeBridge;
 use FondOfSpryker\Zed\DiscountCustomMessages\Dependency\Query\DiscountCustomMessagesToLocaleQueryContainerBridge;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessageQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -108,7 +108,7 @@ class DiscountCustomMessagesDependencyProvider extends AbstractBundleDependencyP
     protected function addDiscountCustomMessageQuery(Container $container): Container
     {
         $container->set(static::QUERY_DISCOUNT_CUSTOM_MESSAGE, static function (Container $container) {
-            return FobDiscountCustomMessageQuery::create();
+            return FooDiscountCustomMessageQuery::create();
         });
 
         return $container;

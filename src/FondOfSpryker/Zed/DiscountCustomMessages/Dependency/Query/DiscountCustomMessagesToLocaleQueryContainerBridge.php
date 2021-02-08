@@ -12,6 +12,9 @@ class DiscountCustomMessagesToLocaleQueryContainerBridge implements DiscountCust
      */
     protected $localeQueryContainer;
 
+    /**
+     * @param \Spryker\Zed\Locale\Persistence\LocaleQueryContainerInterface $localeQueryContainer
+     */
     public function __construct(LocaleQueryContainerInterface $localeQueryContainer)
     {
         $this->localeQueryContainer = $localeQueryContainer;

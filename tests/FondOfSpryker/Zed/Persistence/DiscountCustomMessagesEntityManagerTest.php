@@ -6,8 +6,8 @@ use Codeception\Test\Unit;
 use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\Propel\Mapper\DiscountCustomMessageMapperInterface;
 use Generated\Shared\Transfer\DiscountCustomMessageTransfer;
 use org\bovigo\vfs\vfsStream;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessageQuery;
 use Spryker\Shared\Config\Config;
 
 class DiscountCustomMessagesEntityManagerTest extends Unit
@@ -28,12 +28,12 @@ class DiscountCustomMessagesEntityManagerTest extends Unit
     protected $discountCustomMessageMapperMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage
      */
     protected $discountCustomMessageEntityMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessageQuery
      */
     protected $discountCustomMessageQueryMock;
 
@@ -73,12 +73,12 @@ class DiscountCustomMessagesEntityManagerTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->discountCustomMessageEntityMock = $this->getMockBuilder(FobDiscountCustomMessage::class)
+        $this->discountCustomMessageEntityMock = $this->getMockBuilder(FooDiscountCustomMessage::class)
             ->disableOriginalConstructor()
             ->setMethods(['save', 'formArray'])
             ->getMock();
 
-        $this->discountCustomMessageQueryMock = $this->getMockBuilder(FobDiscountCustomMessageQuery::class)
+        $this->discountCustomMessageQueryMock = $this->getMockBuilder(FooDiscountCustomMessageQuery::class)
             ->disableOriginalConstructor()
             ->getMock();
 

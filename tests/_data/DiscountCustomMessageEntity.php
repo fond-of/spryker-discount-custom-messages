@@ -1,11 +1,8 @@
 <?php
 
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessage;
-use \Orm\Zed\Locale\Persistence\SpyLocale;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessage;
 
-
-
-$customMessageEntity = new FobDiscountCustomMessage();
+$customMessageEntity = new FooDiscountCustomMessage();
 $customMessageEntity
     ->setIdDiscountCustomMessage(1)
     ->setFkDiscount(1)

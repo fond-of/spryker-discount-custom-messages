@@ -4,7 +4,7 @@ namespace FondOfSpryker\Zed\DiscountCustomMessages\Persistence;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Zed\DiscountCustomMessages\Persistence\Propel\Mapper\DiscountCustomMessageMapperInterface;
-use Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery;
+use Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessageQuery;
 
 class DiscountCustomMessagesRepositoryTest extends Unit
 {
@@ -14,7 +14,7 @@ class DiscountCustomMessagesRepositoryTest extends Unit
     protected $discountCustomMessageMapperMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FobDiscountCustomMessageQuery
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Orm\Zed\DiscountDiscountMessage\Persistence\FooDiscountCustomMessageQuery
      */
     protected $discountCustomMessageQueryMock;
 
@@ -37,7 +37,7 @@ class DiscountCustomMessagesRepositoryTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->discountCustomMessageQueryMock = $this->getMockBuilder(FobDiscountCustomMessageQuery::class)
+        $this->discountCustomMessageQueryMock = $this->getMockBuilder(FooDiscountCustomMessageQuery::class)
             ->disableOriginalConstructor()
             ->getMock();
 
